@@ -1,13 +1,14 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { RouterProvider } from "react-router-dom";
+import { AppProvider } from "./AppContext"
 import router from './route/router';
 
 function App() {
   return (
-    <div className="App">
+    <AppProvider>
       <RouterProvider router={router} />
-    </div>
+    </AppProvider>
   );
 }
 

@@ -1,13 +1,12 @@
-import './App.css';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from "react-bootstrap";
+import { RouterProvider } from "react-router-dom";
+import router from './route/router';
 
 function App() {
   return (
     <div className="App">
-      <h2>Hello world!</h2>
-      <Button variant='primary'>Primary</Button>{' '}
+      <RouterProvider router={router} />
     </div>
   );
 }

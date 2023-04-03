@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const Hcontent = () => {
-  const post =[{
-    title:"asd",
-    content:"zxc"
-    },
-    {
-      title:"qwe",
-      content:"kje"
-    },
-  ]
+  const [post, setPost] = useState([])
+  useEffect(() => {
+    axios.get(process.env.REACT_APP_API + 'getUser.php').then((res) => {
+      res.data.map((data) => {
+        setPost(prevPost => [...prevPost, data.Name])
+      })
+    })
+  }, [])
   return (
     <div className="bg-[#e3e3e3] p-5 flex flex-col flex-grow items-center">
       <h2 className="text-4xl">Welcome to Life blog</h2>
@@ -27,7 +27,8 @@ const Hcontent = () => {
               <h2 className="text-3xl">{data.content}</h2>
               <hr className="w-100" />
             </>
-        )})}
+          )
+        })}
       </div>
     </div>
   )

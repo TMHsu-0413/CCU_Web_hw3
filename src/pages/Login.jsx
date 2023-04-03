@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Form, Button, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Cookies from "universal-cookie";
 
 const Login = () => {
   const userRef = useRef();
@@ -15,6 +16,9 @@ const Login = () => {
     var user = userRef.current.value
     var password = passwordRef.current.value
     console.log(user, password)
+    const cookies = new Cookies();
+    cookies.set('token', '2313')
+
     setState(() => ({
       show: true,
       title: "Duplicate username!",

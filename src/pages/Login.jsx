@@ -1,11 +1,14 @@
+import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Form, Button, Alert } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Cookies from "universal-cookie";
 
 const Login = () => {
   const userRef = useRef();
   const passwordRef = useRef();
+  const Navigate = useNavigate();
+  const cookies = new Cookies();
   const [state, setState] = useState({
     show: false,
     title: "",
@@ -15,16 +18,40 @@ const Login = () => {
     e.preventDefault();
     var user = userRef.current.value
     var password = passwordRef.current.value
-    console.log(user, password)
-    const cookies = new Cookies();
-    cookies.set('token', '2313')
 
-    setState(() => ({
-      show: true,
-      title: "Duplicate username!",
-      content: "This user already exists!",
-    }))
+    const sql_inj = (word) => {
+      return word.includes('*') || word.includes('-') || word.includes('/');
+    }
+
+    async function foundUser() {
+      let valid = await axios.post(process.env.REACT_APP_API + 'Login.php',{
+        name:user,
+        password:password
+      })
+
+      if (valid.data.length === 1){
+        cookies.set('token',valid.data[0]["ID"]);
+        Navigate("/Home")
+      }
+      else {
+        setState(() => ({
+          show: true,
+          title: "Failed login!",
+          content: "Username or password is wrong.",
+        }))
+      }
+    }
+
+    if(sql_inj(user) || sql_inj(password)){
+      setState(() => ({
+        show: true,
+        title: "Login errors!",
+        content: "SQL injection problems.",
+      }))
+    }
+    foundUser()
   }
+
   return (
     <div className="min-h-screen flex justify-center items-center bg-[#f2f2f2]">
       <div className="w-72 h-60 left-1/2 top-1/2 fixed" style={{

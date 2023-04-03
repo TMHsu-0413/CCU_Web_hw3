@@ -7,13 +7,14 @@
   if($_SERVER['REQUEST_METHOD'] == 'GET'){
     require "connectDB.php";
 
-    $ID = $_GET["ID"];
-    $sql = "SELECT Name from User WHERE ID=$ID";
+    $name = $_GET["Name"];
+
+    $sql = "SELECT Count(Name) as Size FROM User WHERE Name='$name'";
     $result = $conn->query($sql);
     $a=array();
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-          $b=array("Name"=>$row["Name"]);
+          $b=array("Size"=>$row["Size"]);
           array_push($a,$b);
         }
     }

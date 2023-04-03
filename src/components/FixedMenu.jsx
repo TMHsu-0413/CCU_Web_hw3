@@ -1,33 +1,32 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Dropdown, Nav } from 'react-bootstrap';
-import { Navigate, useNavigate } from "react-router-dom";
+import { Dropdown } from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 
 const FixedMenu = () => {
   const [userName, setUser] = useState(null)
-  useEffect(() => {
-    axios.get(process.env.REACT_APP_API + 'getUserbyID.php').then((res) => {
-      setUser(res.data[0])
-    })
-  }, [])
-  const Navigate = useNavigate();
   const cookies = new Cookies()
+  const Navigate = useNavigate();
+  const ID = cookies.get('token')
+
+  useEffect( async() => {
+    let res = await axios.get(process.env.REACT_APP_API + 'getUserbyID.php', { params: {ID: ID}})
+    setUser(res.data[0]["Name"])
+  },[])
+
   const handleHome = () => {
     Navigate('/Home');
   }
   const handleLogout = () => {
-    if (cookies.get('token') !== undefined)
-      cookies.remove('token')
+    cookies.remove('token')
     Navigate('../')
   }
   const handleBlog = () => {
-    const user = cookies.get('token')
-    Navigate('/User/' + user)
+    Navigate('/User/' + ID)
   }
   const handlePost = () => {
-    const user = cookies.get('token')
-    Navigate('/Task/' + user)
+    Navigate('/Task/' + ID)
   }
   return (
     <Dropdown style={{

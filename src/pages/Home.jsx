@@ -8,7 +8,6 @@ import FixedMenu from "../components/FixedMenu";
 
 const Home = () => {
   const cookies = new Cookies();
-  console.log(cookies.get('token'))
   return (
     <>
       <FixedMenu />

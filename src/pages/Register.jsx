@@ -1,8 +1,10 @@
+import axios from "axios";
 import react, { useEffect, useState, useRef } from "react";
-import { Form, Button, Alert } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Form, Button, Alert, Nav } from 'react-bootstrap';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const Navigate = useNavigate()
   const userRef = useRef();
   const passwordRef = useRef();
   const emailRef = useRef();
@@ -12,20 +14,79 @@ const Login = () => {
     title: "",
     content: ""
   })
-  const handleSubmit = (e) => {
+  function password_weak(password) {
+    var hasNumber = false
+    var hasUpper = false
+    var hasLower = false
+    for (var i = 0; i < password.length; i++) {
+      if (isNaN(parseInt(password[i])) && password[i] === password[i].toLowerCase())
+        hasLower = true
+      else if (isNaN(parseInt(password[i])) && password[i] === password[i].toUpperCase())
+        hasUpper = true
+      else if (!isNaN(parseInt(password[i])))
+        hasNumber = true
+    }
+    return !(hasLower && hasUpper && hasNumber && password.length >= 8);
+  }
+  const handleSubmit = async (e) => {
     e.preventDefault()
     var user = userRef.current.value
     var email = emailRef.current.value
     var password = passwordRef.current.value
     var conPassword = conPasswordRef.current.value
 
-    console.log(user, email, password, conPassword)
-    setState(() => ({
-      // if find duplicat user
-      show: true,
-      title: "Duplicate username!",
-      content: "This user already exists!",
-    }))
+    const sql_inj = (word) => {
+      return word.includes('*') || word.includes('-') || word.includes('/');
+    }
+
+    async function duplicate() {
+      let count = await axios.get(process.env.REACT_APP_API + 'getUserNumberbyName.php', { params: { "Name": user } })
+      let data = parseInt(count.data[0]["Size"])
+      console.log(data)
+      return data >= 1;
+    }
+
+    if (password_weak(password)) {
+      setState(() => ({
+        // if find duplicat user
+        show: true,
+        title: "Registeration errors!",
+        content: "The length of password should be at least 8 and include at least a capital letter, a lowercase letter, and a number.",
+      }))
+    }
+    else if (password !== conPassword) {
+      setState(() => ({
+        // if find duplicat user
+        show: true,
+        title: "Registeration errors!",
+        content: "Password and Confirm password fields were not matched.",
+      }))
+    }
+    else if (sql_inj(user) || sql_inj(password) || sql_inj(email)) {
+      setState(() => ({
+        // if find duplicat user
+        show: true,
+        title: "Registration errors!",
+        content: "SQL injection Problem.",
+      }))
+    }
+    else if (await duplicate()) {
+      setState(() => ({
+        show: true,
+        title: "Duplicate Username!",
+        content: "The username already exists.",
+      }))
+    }
+    // pass all constraints
+    else {
+      await axios.post(process.env.REACT_APP_API + 'Register.php', {
+        name: user,
+        email: email,
+        password: password
+      }).then(() => {
+        Navigate("/Login")
+      })
+    }
   }
   return (
     <div className="min-h-screen flex justify-center items-center bg-[#f2f2f2]">

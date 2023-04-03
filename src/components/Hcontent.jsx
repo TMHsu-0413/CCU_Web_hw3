@@ -3,11 +3,17 @@ import axios from "axios";
 
 const Hcontent = () => {
   const [post, setPost] = useState([])
-  useEffect(() => {
-    axios.get(process.env.REACT_APP_API + 'getUser.php').then((res) => {
-      res.data.map((data) => {
-        setPost(prevPost => [...prevPost, data.Name])
-      })
+  useEffect( async () => {
+    let res = await axios.get(process.env.REACT_APP_API + 'get3posts.php')
+    res.data.map((data) => {
+      let newObj = {
+        "Title":data.Title,
+        "Content":data.Content
+      }
+      setPost((prevPost) => [
+        ...prevPost,
+        newObj
+      ])
     })
   }, [])
   return (
@@ -23,8 +29,8 @@ const Hcontent = () => {
         {post.map((data) => {
           return (
             <>
-              <h2 className="text-5xl">{data.title}</h2>
-              <h2 className="text-3xl">{data.content}</h2>
+              <h2 className="text-5xl">{data.Title}</h2>
+              <h2 className="text-3xl">{data.Content}</h2>
               <hr className="w-100" />
             </>
           )

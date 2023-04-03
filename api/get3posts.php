@@ -7,13 +7,12 @@
   if($_SERVER['REQUEST_METHOD'] == 'GET'){
     require "connectDB.php";
 
-    $ID = $_GET["ID"];
-    $sql = "SELECT Name from User WHERE ID=$ID";
+    $sql = "SELECT Title,Content from Task ORDER BY upd DESC LIMIT 3";
     $result = $conn->query($sql);
     $a=array();
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-          $b=array("Name"=>$row["Name"]);
+          $b=array("Title"=>$row["Title"],"Content"=>$row["Content"]);
           array_push($a,$b);
         }
     }

@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 const Index = () => {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ const Index = () => {
     navigate("/Register");
   }
   return (
+    <>
     <div className="h-screen flex justify-center items-center relative">
       <div className="w-100 h-100 blur-sm saturate-150 bg-[url('image/background.jpg')] bg-cover bg-no-repeat bg-center absolute"></div>
 
@@ -24,6 +26,8 @@ const Index = () => {
         </div>
       </div>
     </div >
+    <Footer />
+    </>
   )
 };
 

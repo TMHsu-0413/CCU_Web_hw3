@@ -4,20 +4,17 @@
   header('Access-Control-Allow-Methods:GET,POST');
   header('Access-Control-Allow-Headers: *');
 
-  if($_SERVER['REQUEST_METHOD'] == 'POST'){
+  if($_SERVER['REQUEST_METHOD'] == 'GET'){
     require "connectDB.php";
-    $input = file_get_contents('php://input');
-    $input=json_decode($input);
 
-    $name = $input->name;
-    $password = $input->password;
+    $ID = $_GET["ID"];
 
-    $sql = "SELECT ID,Name FROM User WHERE Name='$name' and Password='$password'";
+    $sql = "SELECT * from Task WHERE ID=$ID";
     $result = $conn->query($sql);
     $a=array();
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-          $b=array("ID"=>$row["ID"],"Name"=>$row["Name"]);
+          $b=array("ID"=>$row["ID"],"title"=>$row["Title"],"content"=>$row["Content"]);
           array_push($a,$b);
         }
     }
@@ -25,3 +22,4 @@
     $conn->close();
   }
 ?>
+

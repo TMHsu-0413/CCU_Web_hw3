@@ -33,7 +33,8 @@ const Login = () => {
       })
 
       if (valid.data.length === 1) {
-        cookies.set('token', valid.data[0]["ID"]);
+        cookies.set('ID', valid.data[0]["ID"]);
+        cookies.set('Name',valid.data[0]["Name"]);
         Navigate("/Home")
       }
       else {

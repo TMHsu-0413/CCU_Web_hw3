@@ -9,19 +9,13 @@
     $input = file_get_contents('php://input');
     $input=json_decode($input);
 
+    $title = $input->title;
+    $content = $input->content;
     $name = $input->name;
-    $password = $input->password;
 
-    $sql = "SELECT ID,Name FROM User WHERE Name='$name' and Password='$password'";
+    $sql = "INSERT INTO Task (Title,Content,Name,upd) VALUES ('$title','$content','$name',CURRENT_TIMESTAMP)";
     $result = $conn->query($sql);
-    $a=array();
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-          $b=array("ID"=>$row["ID"],"Name"=>$row["Name"]);
-          array_push($a,$b);
-        }
-    }
-    echo json_encode($a);
     $conn->close();
   }
 ?>
+

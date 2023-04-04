@@ -6,6 +6,8 @@ import Home from "../pages/Home";
 import User from "../pages/User";
 import Task from "../pages/Task";
 import { Route, createRoutesFromElements, createBrowserRouter } from "react-router-dom";
+import Logout from "../pages/Logout";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -13,10 +15,11 @@ const router = createBrowserRouter(
       <Route index element={<Index />} />
       <Route path="/Register" element={<Register />} />
       <Route path="/Login" element={<Login />} />
-      <Route path="/Home" element={<Home />} />
-      <Route path="/User/:name" element={<User />} />
-      <Route path="/Task/:name" element={<Task />} />
-      <Route path="/Task/:name/:id?" element={<Task />} />
+      <Route path="/Logout" element={<Logout />} />
+        <Route path="/Home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        <Route path="/User/:name" element={ <ProtectedRoute><User /></ProtectedRoute> } />
+        <Route path="/Task/:name" element={<ProtectedRoute><Task /></ProtectedRoute>} />
+        <Route path="/Task/:name/:id?" element={<ProtectedRoute><Task /></ProtectedRoute>} />
     </Route>
   )
 )

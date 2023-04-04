@@ -4,10 +4,6 @@ import Footer from "../components/Footer";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const Index = () => {
-
-  useEffect(() => {
-    axios.get("http://localhost:3000/backend/connectDB.php");
-  }, [])
   const navigate = useNavigate();
   const ToLoginPage = () => {
     navigate("/Login");

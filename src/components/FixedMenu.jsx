@@ -15,7 +15,7 @@ const FixedMenu = () => {
   const handleLogout = () => {
     cookies.remove('ID')
     cookies.remove('Name')
-    Navigate('../')
+    Navigate('/Logout')
   }
   const handleBlog = () => {
     Navigate('/User/' + Name)

@@ -1,7 +1,8 @@
 import axios from "axios";
-import react, { useEffect, useState, useRef } from "react";
-import { Form, Button, Alert, Nav } from 'react-bootstrap';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import React, { useState, useRef } from "react";
+import { Form, Button, Alert } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
+import { SHA3 } from 'crypto-js';
 
 const Login = () => {
   const Navigate = useNavigate()
@@ -79,10 +80,11 @@ const Login = () => {
     }
     // pass all constraints
     else {
+      let encryped_password = SHA3(password).toString()
       await axios.post(process.env.REACT_APP_API + 'Register.php', {
         name: user,
         email: email,
-        password: password
+        password: encryped_password
       }).then(() => {
         Navigate("/Login")
       })

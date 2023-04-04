@@ -10,9 +10,12 @@ const FixedMenu = () => {
   const Navigate = useNavigate();
   const ID = cookies.get('token')
 
-  useEffect( async() => {
-    let res = await axios.get(process.env.REACT_APP_API + 'getUserbyID.php', { params: {ID: ID}})
-    setUser(res.data[0]["Name"])
+  useEffect(() => {
+    async function fetchData() {
+      let res = await axios.get(process.env.REACT_APP_API + 'getUserbyID.php', { params: {ID: ID}})
+      setUser(res.data[0]["Name"])
+    }
+    fetchData()
   },[])
 
   const handleHome = () => {

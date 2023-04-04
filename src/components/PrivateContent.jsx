@@ -1,22 +1,40 @@
-import React from "react";
-import {Button} from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { Button } from 'react-bootstrap';
 
 const PrivateContent = () => {
-  const post = [{
-    title: "asd",
-    content: "zxc"
-  },
-  {
-    title: "qwe",
-    content: "kje"
-  },
-  ]
+  const [post, setPost] = useState([])
+  const name = useParams().name;
+
+  useEffect(() => {
+    async function fetchData() {
+      let res = await axios.get(process.env.REACT_APP_API + 'getPostbyName.php', { params: { Name: name } })
+      res.data.map((data) => {
+        let newObj = {
+          ID: data.ID,
+          title: data.title,
+          content: data.content
+        }
+        setPost((prevPost) => [
+          ...prevPost,
+          newObj
+        ])
+      })
+    }
+    fetchData()
+
+    // clear Post 
+    return (() => {
+      setPost([])
+    })
+  }, [name])
   return (
     <div className="mt-5 flex flex-col w-100 justify-between pl-10">
       {post.map((data) => {
         return (
           <>
-            <div className="w-100 flex justify-between">
+            <div key={data.ID} className="w-100 flex justify-between">
               <div>
                 <h2 className="text-5xl font-bold">{data.title}</h2>
                 <h2 className="text-3xl">{data.content}</h2>

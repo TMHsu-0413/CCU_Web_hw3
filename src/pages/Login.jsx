@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Form, Button, Alert } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from "universal-cookie";
+import {SHA3} from 'crypto-js';
 
 const Login = () => {
   const userRef = useRef();
@@ -24,13 +25,15 @@ const Login = () => {
     }
 
     async function foundUser() {
-      let valid = await axios.post(process.env.REACT_APP_API + 'Login.php',{
-        name:user,
-        password:password
+      var encrypted_password = SHA3(password).toString()
+
+      let valid = await axios.post(process.env.REACT_APP_API + 'Login.php', {
+        name: user,
+        password: encrypted_password
       })
 
-      if (valid.data.length === 1){
-        cookies.set('token',valid.data[0]["ID"]);
+      if (valid.data.length === 1) {
+        cookies.set('token', valid.data[0]["ID"]);
         Navigate("/Home")
       }
       else {
@@ -42,7 +45,7 @@ const Login = () => {
       }
     }
 
-    if(sql_inj(user) || sql_inj(password)){
+    if (sql_inj(user) || sql_inj(password)) {
       setState(() => ({
         show: true,
         title: "Login errors!",

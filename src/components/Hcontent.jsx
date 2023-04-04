@@ -3,18 +3,22 @@ import axios from "axios";
 
 const Hcontent = () => {
   const [post, setPost] = useState([])
-  useEffect( async () => {
-    let res = await axios.get(process.env.REACT_APP_API + 'get3posts.php')
-    res.data.map((data) => {
-      let newObj = {
-        "Title":data.Title,
-        "Content":data.Content
-      }
-      setPost((prevPost) => [
-        ...prevPost,
-        newObj
-      ])
-    })
+
+  useEffect(() => {
+    async function fetchData() {
+      let res = await axios.get(process.env.REACT_APP_API + 'get3posts.php')
+      res.data.map((data) => {
+        let newObj = {
+          "Title": data.Title,
+          "Content": data.Content
+        }
+        setPost((prevPost) => [
+          ...prevPost,
+          newObj
+        ])
+      })
+    }
+    fetchData()
   }, [])
   return (
     <div className="bg-[#e3e3e3] p-5 flex flex-col flex-grow items-center">

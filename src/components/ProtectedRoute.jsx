@@ -20,13 +20,13 @@ const ProtectedRoute = ({ children }) => {
       }
     })
 
-    return  res.data[0]["Size"] === '1';
+    return res.data[0]["Size"] === '1';
   }
-  
+
   let isLogin = Middleware()
 
   if (!isLogin)
-    return <Navigate to="/Login" />
+    return <Navigate to="/hw3/Login" />
   else
     return children
 

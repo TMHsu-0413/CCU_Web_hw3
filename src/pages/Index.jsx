@@ -6,10 +6,10 @@ import { useNavigate } from "react-router-dom";
 const Index = () => {
   const navigate = useNavigate();
   const ToLoginPage = () => {
-    navigate("/Login");
+    navigate("/hw3/Login");
   }
   const ToRegPage = () => {
-    navigate("/Register");
+    navigate("/hw3/Register");
   }
   return (
     <>

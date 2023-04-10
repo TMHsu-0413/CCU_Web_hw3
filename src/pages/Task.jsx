@@ -15,8 +15,8 @@ const Task = () => {
   var params_name = params.name;
   var params_id = null;
   var EditMode = false;
-  
-  if (params.id !== undefined){
+
+  if (params.id !== undefined) {
     EditMode = true
     params_id = params.id
   }
@@ -25,37 +25,39 @@ const Task = () => {
     e.preventDefault()
     const title = titleRef.current.value;
     const content = contentRef.current.value;
-    if (!EditMode){
-      await axios.post(process.env.REACT_APP_API + 'addPost.php',{
-        title:title,
-        content:content,
-        name:cookies.get('Name')
+    if (!EditMode) {
+      await axios.post(process.env.REACT_APP_API + 'addPost.php', {
+        title: title,
+        content: content,
+        name: cookies.get('Name')
       })
-      Navigate('/User/' + params_name)
+      Navigate('/hw3/User/' + params_name)
     }
     else {
-      await axios.put(process.env.REACT_APP_API + 'modifyPostbyID.php',{
+      await axios.put(process.env.REACT_APP_API + 'modifyPostbyID.php', {
         ID: idRef.current.value,
-        title:title,
-        content:content
+        title: title,
+        content: content
       })
-      Navigate('/User/' + params_name)
+      Navigate('/hw3/User/' + params_name)
     }
   }
 
   useEffect(() => {
     const fetchData = async () => {
-      let res = await axios.get(process.env.REACT_APP_API + 'getPostbyID.php', { params: {
-        ID: params_id
-      }});
+      let res = await axios.get(process.env.REACT_APP_API + 'getPostbyID.php', {
+        params: {
+          ID: params_id
+        }
+      });
       idRef.current.value = res.data[0]["ID"];
       titleRef.current.value = res.data[0]["title"];
       contentRef.current.value = res.data[0]["content"];
     }
-    if (params_id !== null){
+    if (params_id !== null) {
       fetchData()
     }
-  },[])
+  }, [])
   return (
     <div className="min-h-screen flex justify-center items-center bg-[#f2f2f2]">
       <div className="w-96 rounded" style={{

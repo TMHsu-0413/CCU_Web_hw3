@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Button } from 'react-bootstrap';
@@ -12,15 +12,15 @@ const PrivateContent = () => {
   const cookies_name = cookies.get('Name')
 
   const handleCreate = () => {
-    Navigate('/Task/' + params_name)
+    Navigate('/hw3/Task/' + params_name)
   }
 
   const handleModify = (ID) => {
-    Navigate('/Task/' + params_name + '/' + ID);
+    Navigate('/hw3/Task/' + params_name + '/' + ID);
   }
 
   const handleDelete = async (currentID) => {
-    await axios.delete(process.env.REACT_APP_API + 'delPostbyID.php', {data: {ID:currentID}})
+    await axios.delete(process.env.REACT_APP_API + 'delPostbyID.php', { data: { ID: currentID } })
     window.location.reload()
   }
 
@@ -45,7 +45,7 @@ const PrivateContent = () => {
     return (() => {
       setPost([])
     })
-  },[params_name])
+  }, [params_name])
   return (
     <div className="mt-5 flex flex-col w-100 justify-between pl-10">
       {post.map((data) => {

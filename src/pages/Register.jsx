@@ -43,7 +43,6 @@ const Login = () => {
     async function duplicate() {
       let count = await axios.get(process.env.REACT_APP_API + 'getUserNumberbyName.php', { params: { "Name": user } })
       let data = parseInt(count.data[0]["Size"])
-      console.log(data)
       return data >= 1;
     }
 
@@ -86,7 +85,7 @@ const Login = () => {
         email: email,
         password: encryped_password
       }).then(() => {
-        Navigate("/Login")
+        Navigate("/hw3/Login")
       })
     }
   }
@@ -137,7 +136,7 @@ const Login = () => {
               <Form.Label  >Confirm password</Form.Label>
               <Form.Control required ref={conPasswordRef} type="password" placeholder="Confirm Password" />
             </Form.Group>
-            <Link to="/Login"><h2 className="text-sm">I already have an account!</h2></Link>
+            <Link to="/hw3/Login"><h2 className="text-sm">I already have an account!</h2></Link>
             <Button variant="primary" type="submit">
               Register
             </Button>

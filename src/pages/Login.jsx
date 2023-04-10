@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Form, Button, Alert } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from "universal-cookie";
-import {SHA3} from 'crypto-js';
+import { SHA3 } from 'crypto-js';
 
 const Login = () => {
   const userRef = useRef();
@@ -34,8 +34,8 @@ const Login = () => {
 
       if (valid.data.length === 1) {
         cookies.set('ID', valid.data[0]["ID"]);
-        cookies.set('Name',valid.data[0]["Name"]);
-        Navigate("/Home")
+        cookies.set('Name', valid.data[0]["Name"]);
+        Navigate("/hw3/Home")
       }
       else {
         setState(() => ({
@@ -92,7 +92,7 @@ const Login = () => {
               <Form.Label>Password</Form.Label>
               <Form.Control required ref={passwordRef} type="password" placeholder="Password" />
             </Form.Group>
-            <Link to="/Register"><h2 className="text-sm">Register a new membership</h2></Link>
+            <Link to="/hw3/Register"><h2 className="text-sm">Register a new membership</h2></Link>
             <Button variant="primary" type="submit">
               Login
             </Button>

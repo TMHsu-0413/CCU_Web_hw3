@@ -10,18 +10,18 @@ const FixedMenu = () => {
   const Name = cookies.get('Name')
 
   const handleHome = () => {
-    Navigate('/Home');
+    Navigate('/hw3/Home');
   }
   const handleLogout = () => {
     cookies.remove('ID')
     cookies.remove('Name')
-    Navigate('/Logout')
+    Navigate('/hw3/Logout')
   }
   const handleBlog = () => {
-    Navigate('/User/' + Name)
+    Navigate('/hw3/User/' + Name)
   }
   const handlePost = () => {
-    Navigate('/Task/' + Name)
+    Navigate('/hw3/Task/' + Name)
   }
   return (
     <Dropdown style={{

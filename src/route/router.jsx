@@ -5,7 +5,7 @@ import Login from "../pages/Login";
 import Home from "../pages/Home";
 import User from "../pages/User";
 import Task from "../pages/Task";
-import { Route, createRoutesFromElements, createHashRouter, createBrowserRouter } from "react-router-dom";
+import { Route, createRoutesFromElements, createBrowserRouter } from "react-router-dom";
 import Logout from "../pages/Logout";
 import ProtectedRoute from "../components/ProtectedRoute";
 

@@ -9,7 +9,6 @@ const PrivateContent = () => {
   const cookies = new Cookies();
   const Navigate = useNavigate()
   const params_name = useParams().name
-  const cookies_name = cookies.get('Name')
 
   const handleCreate = () => {
     Navigate('/hw3/Task/' + params_name)

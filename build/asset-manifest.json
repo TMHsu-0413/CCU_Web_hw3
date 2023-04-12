@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "./static/css/main.f5315808.css",
-    "main.js": "./static/js/main.d90a1df9.js",
-    "static/js/787.9ed461cb.chunk.js": "./static/js/787.9ed461cb.chunk.js",
-    "static/media/background.jpg": "./static/media/background.af0b82fb9b0d7385897f.jpg",
-    "static/media/background1.jpeg": "./static/media/background1.cc1e3bb23021cc3c0496.jpeg",
-    "static/media/meme2.jpg": "./static/media/meme2.2161e4381763d9c9085e.jpg",
-    "index.html": "./index.html",
-    "main.f5315808.css.map": "./static/css/main.f5315808.css.map",
-    "main.d90a1df9.js.map": "./static/js/main.d90a1df9.js.map",
-    "787.9ed461cb.chunk.js.map": "./static/js/787.9ed461cb.chunk.js.map"
+    "main.css": "/hw3/static/css/main.5c486b87.css",
+    "main.js": "/hw3/static/js/main.a99fb58c.js",
+    "static/js/787.9ed461cb.chunk.js": "/hw3/static/js/787.9ed461cb.chunk.js",
+    "static/media/background.jpg": "/hw3/static/media/background.af0b82fb9b0d7385897f.jpg",
+    "static/media/background1.jpeg": "/hw3/static/media/background1.cc1e3bb23021cc3c0496.jpeg",
+    "static/media/meme2.jpg": "/hw3/static/media/meme2.2161e4381763d9c9085e.jpg",
+    "index.html": "/hw3/index.html",
+    "main.5c486b87.css.map": "/hw3/static/css/main.5c486b87.css.map",
+    "main.a99fb58c.js.map": "/hw3/static/js/main.a99fb58c.js.map",
+    "787.9ed461cb.chunk.js.map": "/hw3/static/js/787.9ed461cb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f5315808.css",
-    "static/js/main.d90a1df9.js"
+    "static/css/main.5c486b87.css",
+    "static/js/main.a99fb58c.js"
   ]
 }

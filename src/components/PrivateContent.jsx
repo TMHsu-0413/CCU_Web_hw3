@@ -20,7 +20,7 @@ const PrivateContent = () => {
 
   const handleDelete = async (currentID) => {
     await axios.delete(process.env.REACT_APP_API + 'delPostbyID.php', { data: { ID: currentID } })
-    window.location.reload()
+    Navigate(0)
   }
 
   useEffect(() => {

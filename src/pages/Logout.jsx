@@ -4,9 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 const Logout = () => {
   const Navigate = useNavigate()
   useEffect(() => {
-    setTimeout(() => {
+    const time = setTimeout(() => {
       Navigate('/hw3');
     }, 5000)
+
+    return (() => {
+      clearTimeout(time)
+    })
   })
 
   return (

@@ -13,8 +13,8 @@ const FixedMenu = () => {
     Navigate('/hw3/Home');
   }
   const handleLogout = () => {
-    cookies.remove('ID')
-    cookies.remove('Name')
+    cookies.remove('ID', { path: '/hw3' })
+    cookies.remove('Name', { path: '/hw3' })
     Navigate('/hw3/Logout')
   }
   const handleBlog = () => {

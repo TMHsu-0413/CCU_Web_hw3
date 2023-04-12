@@ -16,6 +16,7 @@ const Hcontent = () => {
           ...prevPost,
           newObj
         ])
+        return newObj
       })
     }
     fetchData()
@@ -32,11 +33,11 @@ const Hcontent = () => {
       <div className="flex w-100 flex-col self-start pl-10">
         {post.map((data) => {
           return (
-            <>
+            <div>
               <h2 className="text-5xl">{data.Title}</h2>
               <h2 className="text-3xl">{data.Content}</h2>
               <hr className="w-100" />
-            </>
+            </div>
           )
         })}
       </div>
